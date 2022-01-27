@@ -28,14 +28,6 @@ export class ProductsComponent implements OnInit,OnChanges {
   // @Output() AddToCart:EventEmitter<IShoppingCartItems>;
 
   constructor() {
-
-    this.AddToCart= new EventEmitter<IShoppingCartItems[]>();
-    //this.AddToCart= new EventEmitter<IShoppingCartItems>();
-    this.storeInfo=new StoreData('Happy Store',
-    ['Cairo', 'Alex', 'Giza'],
-    'https://picsum.photos/350/200');
-
-    this.discount= DiscountOffers.discount1;
     this.ProductList=[{ID:1,Name:"dress",Quantity:1,Price:150,Image:'https://picsum.photos/id/1014/300/250',CateogryID:1},
     {ID:2,Name:"Apple",Quantity:10,Price:40000,Image:'https://picsum.photos/id/48/300/250',CateogryID:3}
    ,{ID:3,Name:"table",Quantity:9,Price:4000,Image:'https://picsum.photos/id/1068/300/250',CateogryID:2}
@@ -45,7 +37,14 @@ export class ProductsComponent implements OnInit,OnChanges {
     ,{ID:7,Name:"skirt",Quantity:0,Price:100,Image:'https://picsum.photos/id/535/300/250',CateogryID:1}
     ,{ID:8,Name:"Dell",Quantity:16,Price:20000,Image:'https://picsum.photos/id/0/300/250',CateogryID:3}
     ]
+    this.AddToCart= new EventEmitter<IShoppingCartItems[]>();
+    //this.AddToCart= new EventEmitter<IShoppingCartItems>();
+    this.storeInfo=new StoreData('Happy Store',
+    ['Cairo', 'Alex', 'Giza'],
+    'https://picsum.photos/350/200');
 
+    this.discount= DiscountOffers.discount1;
+   
     this.filterProductList=this.ProductList;
     this.ClientName="nada"
    this.date=new Date()
