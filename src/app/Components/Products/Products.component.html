@@ -1,0 +1,112 @@
+
+<!-- <ul>
+  <li *ngFor=" let item of storeInfo.branches">
+    {{item}}
+  </li>
+</ul> -->
+<!-- <h2 *ngIf="discount!='NoDiscount'" >We offer an explicit discount of {{discount}} from the discount property </h2> -->
+<!-- <br><br> -->
+  <!-- <ul>
+    <h4>Choose Category:</h4>
+    <li *ngFor=" let itm of CategoryItem"  class="dropdown-item fs-4 w-50 ps-5" (click)="chooseCategory(itm.ID)">
+      {{itm.Name}}
+    </li>
+  </ul> -->
+<!-- <br> -->
+<!-- <div class="mb-3">
+  <label for="catID" class="form-label"></label>
+  <select class="form-control" name="category"   id="catID" [(ngModel)]="selectedCatID" >
+    <option *ngFor=" let item of CategoryItem" [value]='item.ID'>{{item.Name}}</option>
+    
+  </select>
+</div>
+<div>
+  {{selectedCatID}}
+</div> -->
+<!-- <br> -->
+<!-- <table class="table table-striped table-light table-hover " *ngIf="!IsPurshased;else other_content">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+      <th scope="col">CateogryID</th>
+    </tr>
+  </thead>
+  <tbody>
+     <tr *ngFor="let item of ProductList">
+     <td *ngIf="item.CateogryID==CategorId ">{{item.ID}}</td>
+     <td *ngIf="item.CateogryID==CategorId ">{{item.Name}}</td>
+     <td *ngIf="item.CateogryID==CategorId ">{{item.Quantity}}</td>
+     <td *ngIf="item.CateogryID==CategorId ">{{item.Price}}</td>
+     <td *ngIf="item.CateogryID==CategorId ">{{item.CateogryID}}</td>
+     </tr>
+  </tbody>
+</table>
+<ng-template #other_content><h1>Thanks for purchasing from our Store {{ClientName}}</h1></ng-template> -->
+<!-- <h3 *ngIf="IsPurshased">Thanks for purchasing from our Store {{ClientName}}</h3> -->
+<!-- <br><br><br> -->
+<!-- <button class="btn btn-primary btn-lg " (click)="toggle()"> buy</button> -->
+
+    <!-- <button mat-raised-button color="primary" (click)="toggle()">buy</button> -->
+    <!-- <table class="table  bg-light  text-center" >
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Image</th>
+          <th scope="col">CateogryID</th>
+          <th>Count</th>
+          <th>Buy</th>
+        </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor="let item of ProductList"  [ngClass]="{'bg-warning':item.Quantity==1}" [hidden]="item.Quantity==0" [class.d-none]="selectedCatID!=item.CateogryID">
+           <td>{{item.ID}}</td>
+           <td>{{item.Name}}</td>
+           
+           <td>
+            <ng-container [ngSwitch]="item.Quantity">
+              <div *ngSwitchCase="0">Out of stock</div>
+              <div *ngSwitchCase="1">last item!</div>
+              <div *ngSwitchDefault>{{item.Quantity}}</div>
+            </ng-container>
+           </td>
+           <td>{{item.Price}}</td>
+           <td><img [src]="item.Image" alt=""></td>
+           <td>{{item.CateogryID}}</td>
+           <td><input #itemsCount type="number" class="form-control"></td>
+           <td><button type="button" class="btn btn-secondary" (click)="buy(item.Price, itemsCount.value,item.Quantity); item.Quantity=item.Quantity-1">Buy</button></td>
+         </tr>
+      </tbody>
+    </table> -->
+
+<div class="row row-cols-1 row-cols-md-3 g-4  justify-content-center">
+  <div class="col" *ngFor="let item of filterProductList">
+  <div class="card h-100 text-center m-2" style="width: 15rem;" shadow [ngClass]="{'bg-warning':item.Quantity==1,'bg-danger':item.Quantity==0}" >
+    <img [src]="item.Image" class="card-img-top " alt="..." >
+    <div class="card-body">
+      <h2 class="card-title" appProductCard="blue">{{item.Name}}</h2>
+      <p class="card-text" >Price : {{item.Price | currency:'EGP': 'code'}}</p>
+      <ng-container [ngSwitch]="item.Quantity">
+        <div *ngSwitchCase="0">Out of stock</div>
+        <div *ngSwitchCase="1">last item!</div>
+        <div *ngSwitchDefault>{{item.Quantity}}</div>
+      </ng-container>
+      <input #itemsCount type="number" class="form-control" min="1" [max]="item.Quantity">
+      <button type="button" class="btn btn-secondary" (click)="Add(item.ID,item.Name,item.Price,item.Quantity, +itemsCount.value)">Add</button>
+      <!-- <button type="button" class="btn btn-secondary" (click)="Add(item, +itemsCount.value)">Add</button> -->
+
+    </div></div>
+  </div>
+
+</div>
+<!-- <div>{{NID |egyptianNationalID:''}}</div>
+<div>{{card|creditcard}}</div> -->
+    <!-- <div>Total Price:  {{totalPrice | currency :' EGP'}}</div> -->
+    <!-- <br> -->
+    <!-- <p>Date: {{date |date:'medium'}}</p> -->
