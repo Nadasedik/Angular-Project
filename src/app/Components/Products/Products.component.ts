@@ -5,6 +5,8 @@ import { IProduct } from './../../ViewModels/IProduct';
 import { StoreData } from './../../ViewModels/StoreData';
 import { Component, OnInit ,Inject,Input,OnChanges,EventEmitter, Output} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { StaticProductService } from 'src/app/Services/static-product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-Products',
@@ -12,9 +14,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./Products.component.scss']
 })
 export class ProductsComponent implements OnInit,OnChanges {
-  storeInfo:StoreData;
-  ProductList:IProduct[];
-  filterProductList:IProduct[]=[];
+  // storeInfo:StoreData;
+   PrductList:IProduct[]=[];
+ // filterProductList:IProduct[]=[];
   discount:DiscountOffers;
   ClientName:string;
   IsPurshased  :boolean = false;
@@ -27,33 +29,37 @@ export class ProductsComponent implements OnInit,OnChanges {
   @Output() AddToCart:EventEmitter<IShoppingCartItems[]>;
   // @Output() AddToCart:EventEmitter<IShoppingCartItems>;
 
-  constructor() {
+  constructor( private staticPrd:StaticProductService
+              , private router:Router) {
 
     this.AddToCart= new EventEmitter<IShoppingCartItems[]>();
     //this.AddToCart= new EventEmitter<IShoppingCartItems>();
-    this.storeInfo=new StoreData('Happy Store',
-    ['Cairo', 'Alex', 'Giza'],
-    'https://picsum.photos/350/200');
+    // this.storeInfo=new StoreData('Happy Store',
+    // ['Cairo', 'Alex', 'Giza'],
+    // 'https://picsum.photos/350/200');
 
     this.discount= DiscountOffers.discount1;
-    this.ProductList=[{ID:1,Name:"dress",Quantity:1,Price:150,Image:'https://picsum.photos/id/1014/300/250',CateogryID:1},
-    {ID:2,Name:"Apple",Quantity:10,Price:40000,Image:'https://picsum.photos/id/48/300/250',CateogryID:3}
-   ,{ID:3,Name:"table",Quantity:9,Price:4000,Image:'https://picsum.photos/id/1068/300/250',CateogryID:2}
-   ,{ID:4,Name:"LG",Quantity:13,Price:30000,Image:'https://picsum.photos/id/20/300/250',CateogryID:3}
-   ,{ID:5,Name:"T-shirt",Quantity:2,Price:100,Image:'https://picsum.photos/id/1059/300/250',CateogryID:1}
-   ,{ID:6,Name:"Lenovo",Quantity:20,Price:25000,Image:'https://picsum.photos/id/445/300/250',CateogryID:3}
-    ,{ID:7,Name:"skirt",Quantity:0,Price:100,Image:'https://picsum.photos/id/535/300/250',CateogryID:1}
-    ,{ID:8,Name:"Dell",Quantity:16,Price:20000,Image:'https://picsum.photos/id/0/300/250',CateogryID:3}
-    ]
+  //   this.ProductList=[{ID:1,Name:"dress",Quantity:1,Price:150,Image:'https://picsum.photos/id/1014/300/250',CateogryID:1},
+  //   {ID:2,Name:"Apple",Quantity:10,Price:40000,Image:'https://picsum.photos/id/48/300/250',CateogryID:3}
+  //  ,{ID:3,Name:"table",Quantity:9,Price:4000,Image:'https://picsum.photos/id/1068/300/250',CateogryID:2}
+  //  ,{ID:4,Name:"LG",Quantity:13,Price:30000,Image:'https://picsum.photos/id/20/300/250',CateogryID:3}
+  //  ,{ID:5,Name:"T-shirt",Quantity:2,Price:100,Image:'https://picsum.photos/id/1059/300/250',CateogryID:1}
+  //  ,{ID:6,Name:"Lenovo",Quantity:20,Price:25000,Image:'https://picsum.photos/id/445/300/250',CateogryID:3}
+  //   ,{ID:7,Name:"skirt",Quantity:0,Price:100,Image:'https://picsum.photos/id/535/300/250',CateogryID:1}
+  //   ,{ID:8,Name:"Dell",Quantity:16,Price:20000,Image:'https://picsum.photos/id/0/300/250',CateogryID:3}
+  //   ]
 
-    this.filterProductList=this.ProductList;
+    //this.filterProductList=this.ProductList;
     this.ClientName="nada"
    this.date=new Date()
   }
 ngOnChanges():void{
-  this.filterByCategory()
+  //this.filterByCategory()
+  this.PrductList=this.staticPrd.getProductBtCatID(this.SCatgID)
 }
   ngOnInit() {
+    this.PrductList=this.staticPrd.getAllProduct();
+    //this.filterProductList=this.staticPrd.getAllProduct()
   }
 toggle()
 {
@@ -114,11 +120,12 @@ Add(id:number,name:string,price:number,quantity:number,count:number)
 }
  
 }
+
 changeQuantity(PrdName: string, qnt: number): void 
 {
-  let product = this.ProductList.find(p => p.Name == PrdName);
+  let product = this.PrductList.find(p => p.Name == PrdName);
   if(product) {
-    this.ProductList.map(prod => {
+    this.PrductList.map(prod => {
       if(prod.Name == PrdName) {
         prod.Quantity -= qnt;
       }
@@ -126,16 +133,21 @@ changeQuantity(PrdName: string, qnt: number): void
   }
 }
 
-private filterByCategory()
+// private filterByCategory()
+// {
+//   if(this.SCatgID==0)
+//    this.filterProductList=this.ProductList
+//   else{
+//   this.filterProductList=this.ProductList.filter((prd)=>{
+//   return prd.CateogryID==this.SCatgID
+// })}
+// //console.log(this.filterProductList)
+// return this.filterProductList
+// }
+
+getDetails(prdID:number)
 {
-  if(this.SCatgID==0)
-   this.filterProductList=this.ProductList
-  else{
-  this.filterProductList=this.ProductList.filter((prd)=>{
-  return prd.CateogryID==this.SCatgID
-})}
-//console.log(this.filterProductList)
-return this.filterProductList
+this.router.navigate(['/Products',prdID])
 }
 
 }

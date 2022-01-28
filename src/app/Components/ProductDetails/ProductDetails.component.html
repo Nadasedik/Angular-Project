@@ -1,0 +1,21 @@
+<div class="card  shadow-lg  bg-body rounded col-9 mt-5 mx-auto" style="height: 49.2%;" >
+  <div class="row g-0 " >
+    <div class="col-md-5 " >
+      <img [src]="Products?.Image" class="img-fluid rounded-start h-100 m-0" alt="...">
+    </div>
+    <!-- |currency:'EGP': 'code' -->
+    <div class="col-md-6 ms-4">
+      <div class="card-body " >
+        <h1 class="card-title fs-1 mb-3 mt-2">{{Products?.Name}}</h1>
+        <div class="fs-4 mt-5 mb-3">Price : {{Products?.Price }}</div>
+        <p class="fs-5 mt-5 mb-5">Quantity : {{Products?.Quantity }}</p>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button type="button" class="btn btn-danger" [disabled]="CprodId==AllProduct[0]"(click)="Prev()">Previous</button>
+          <button type="button" class="btn btn-dark" (click)="Back()">Back</button>
+          <button type="button" class="btn btn-info" [disabled]="CprodId==AllProduct[AllProduct.length-1]" (click)="Next()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

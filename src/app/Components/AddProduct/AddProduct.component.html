@@ -1,0 +1,33 @@
+<div class="card text-light  w-75 mx-auto shadow mb-4 mt-5 p-5 rounded border-0" style="background: rgb(140,190,235);
+background: linear-gradient(63deg, rgba(140,190,235,1) 0%, rgba(21,132,190,1) 100%);">
+<form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Product ID</label>
+    <input type="email" class="form-control" #pID id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Product Name</label>
+    <input type="email" class="form-control" #pName id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Product Quantity</label>
+    <input type="email" class="form-control" #pPrice id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Product Price</label>
+    <input type="email" class="form-control" #pQnt id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Product Image</label>
+    <input type="email" class="form-control" #pImg id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Category ID</label>
+    <input type="email" class="form-control" #pCatID id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  
+  <button type="submit" class="btn btn-light" 
+  (click)="AddProduct(+pID.value,pName.value,+pQnt.value,+pPrice.value,pImg.value,+pCatID.value)">
+  ADD Product</button>
+</form>
+</div>

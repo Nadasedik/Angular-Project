@@ -1,12 +1,15 @@
-<app-Header></app-Header>
+<!-- <app-Header></app-Header>
 <div class="row g-0">
-    <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
-
-<app-SideMenu class="col-3 me-5"></app-SideMenu>
+<mat-slider min="1" max="100" step="1" value="50"></mat-slider>
+<app-SideMenu class="col-3 "></app-SideMenu>
 <app-OrderMaster class="col-8"></app-OrderMaster>
-
+<div class="col-9">
+    <router-outlet></router-outlet>
+</div>
 </div>
 <div>
   
 <app-Footer ></app-Footer>
-</div>
+</div> -->
+<app-Header></app-Header>
+<router-outlet></router-outlet>

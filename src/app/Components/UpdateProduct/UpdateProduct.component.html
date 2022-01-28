@@ -1,0 +1,64 @@
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100" style="background-color: #f3f2f2;">
+      <div class="container mt-3 mb-4">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-12 col-lg-9 col-xl-8">
+            <div class="card" style="border-radius: 1rem;">
+              <div class="row g-0">
+                <div class="col-md-4 d-none d-md-block">
+                  <img
+                    src="https://mdbootstrap.com/img/Photos/Others/sidenav2.jpg"
+                    alt="Update"
+                    class="img-fluid h-100" style="border-top-left-radius: 1rem; border-bottom-left-radius: 1rem;"
+                  />
+                </div>
+                <div class="col-md-8 d-flex align-items-center">
+                  <div class="card-body py-5 px-4 p-md-5">
+
+                    <form action="">
+                      <h1 class="fw-bold mb-4 fs-2" style="color: #8aa6d3;">Update Product Info</h1>
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example1">Product ID</label>
+                        <input type="text" id="form2Example1" class="form-control" #pId/> 
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example1">Product Name</label>
+                        <input type="text" id="form2Example1" class="form-control" #pname/> 
+                      </div>
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example1">Product Quantity</label>
+                        <input type="text" id="form2Example1" class="form-control" #pqnt/> 
+                      </div>
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example1">Product Price</label>
+                        <input type="text" id="form2Example1" class="form-control" #pPrice/> 
+                      </div>
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example1">Product Image</label>
+                        <input type="text" id="form2Example1" class="form-control" #pImg/> 
+                      </div>
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example1">Category ID</label>
+                        <input type="text" id="form2Example1" class="form-control" #cID/> 
+                      </div>
+
+                      <div class="d-flex justify-content-end pt-1 mb-4">
+                        <button class="btn btn-primary btn-rounded" type="button" style="background-color: #2d6acc;"
+                        (click)="UpadateProduct([pId.value,pname.value,pqnt.value,pPrice.value,pImg.value,cID.value])">Update Product</button>
+                      </div>
+                      <hr>
+                      
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

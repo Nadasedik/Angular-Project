@@ -85,8 +85,8 @@
       </tbody>
     </table> -->
 
-<div class="row row-cols-1 row-cols-md-3 g-4  justify-content-center">
-  <div class="col" *ngFor="let item of filterProductList">
+<div class="row row-cols-1 row-cols-md-3 g-4  justify-content-center mb-5 g-0 m-0">
+  <div class="col" *ngFor="let item of PrductList">
   <div class="card h-100 text-center m-2" style="width: 15rem;" shadow [ngClass]="{'bg-warning':item.Quantity==1,'bg-danger':item.Quantity==0}" >
     <img [src]="item.Image" class="card-img-top " alt="..." >
     <div class="card-body">
@@ -98,7 +98,11 @@
         <div *ngSwitchDefault>{{item.Quantity}}</div>
       </ng-container>
       <input #itemsCount type="number" class="form-control" min="1" [max]="item.Quantity">
-      <button type="button" class="btn btn-secondary" (click)="Add(item.ID,item.Name,item.Price,item.Quantity, +itemsCount.value)">Add</button>
+      <button mat-raised-button color="accent" class="m-3" (click)="Add(item.ID,item.Name,item.Price,item.Quantity, +itemsCount.value)">Add</button>
+      <!-- <button mat-raised-button color="primary" (click)="getDetails(item.ID)">Details</button> -->
+      <a mat-raised-button color="primary" [routerLink]="['/Products',item.ID]" target="_self">Details</a>
+      <a mat-raised-button color="warm" [routerLink]="['/UpdateProduct',item.ID]" target="_self">update</a>
+
       <!-- <button type="button" class="btn btn-secondary" (click)="Add(item, +itemsCount.value)">Add</button> -->
 
     </div></div>

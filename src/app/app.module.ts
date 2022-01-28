@@ -1,3 +1,8 @@
+import { AddProductComponent } from './Components/AddProduct/AddProduct.component';
+import { LayoutComponent } from './Components/Layout/Layout.component';
+import { LoginFormComponent } from './Components/LoginForm/LoginForm.component';
+import { NotFoundPageComponent } from './Components/NotFoundPage/NotFoundPage.component';
+import { MainPageComponent } from './Components/MainPage/MainPage.component';
 import { SideMenuComponent } from './Components/SideMenu/SideMenu.component';
 import { ProductsComponent } from './Components/Products/Products.component';
 import { FooterComponent } from './Components/Footer/Footer.component';
@@ -15,6 +20,7 @@ import { ProductCardDirective } from './Directive/product-card.directive';
 import { EgyptianNationalIDPipe } from './Pipes/egyptian-national-id.pipe';
 import { CreditcardPipe } from './Pipes/creditcard.pipe';
 import {OrderMasterComponent} from './Components/Order/OrderMaster/OrderMaster.component';
+import { CommonModule } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -26,7 +32,12 @@ import {OrderMasterComponent} from './Components/Order/OrderMaster/OrderMaster.c
     ProductCardDirective,
     EgyptianNationalIDPipe,
     CreditcardPipe,
-    OrderMasterComponent
+    OrderMasterComponent,
+    MainPageComponent,
+    NotFoundPageComponent,
+    LoginFormComponent,
+    LayoutComponent,
+    AddProductComponent,
 
   ],
   imports: [
@@ -35,7 +46,8 @@ import {OrderMasterComponent} from './Components/Order/OrderMaster/OrderMaster.c
     BrowserAnimationsModule,
     MatSliderModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    CommonModule
     
   ],
   providers: [],

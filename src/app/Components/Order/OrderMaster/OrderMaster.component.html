@@ -1,14 +1,13 @@
-<img src="assets/2.jpg" alt="img" style="width: 100%; height: 300px; margin-top: 10px;">
 
-<div class="mb-3">
+<div class="mb-3 ">
   <label for="catID" class="form-label"></label>
-  <select class="form-control" name="category"   id="catID" [(ngModel)]="selectedCatID" >
+  <select class="form-control w-75 mx-auto" name="category"   id="catID" [(ngModel)]="selectedCatID" >
     <option value="0" selected>All</option>
     <option *ngFor=" let item of CategoryItem" [value]='item.ID'>{{item.Name}}</option>
     
   </select>
 </div>
-<div>
+<div class="ms-5 ps-5">
   {{selectedCatID}}
 </div>
 
@@ -39,14 +38,14 @@
       <td><input type="number" #refCount value={{item.SelectedQuantity}}
         class="form-control w-50" (change)="calcTotalPrice(item, +refCount.value)" min="1" [max]="item.TotalQuantity"></td>
       <td>{{item.Unitprice * item.SelectedQuantity |currency:'EGP'}}</td>
-      <td><button type="button" class="btn btn-danger btn-sm" >delete</button></td>
+      <td><button type="button" class="btn btn-danger btn-sm" (click)="delete(item.ProductID)">delete</button></td>
       <!-- <td><button type="button" class="btn btn-danger btn-sm" (click)="delete(item.ProductID)">delete</button></td> -->
     </tr>
   </ng-container>
   </tbody>
 </table>
 <hr>
-<button type="button" class="btn btn-danger  float-end" (click)="finalTotalPrice()">Place order</button>
-<div>Order Total Price :  {{TotalPrice | currency :' EGP'}}</div>
+<button type="button" class="btn btn-danger  float-end me-2" (click)="finalTotalPrice()">Place order</button><br>
+<div class="fs-5 ms-3">Order Total Price :  {{TotalPrice | currency :' EGP'}}</div>
 <br>
 <!-- <th scope="col"><button type="button" class="btn btn-danger">Remove</button></th> -->

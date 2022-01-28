@@ -8,6 +8,7 @@ import { ICategory } from './../../../ViewModels/ICategory';
   styleUrls: ['./OrderMaster.component.scss']
 })
 export class OrderMasterComponent implements OnInit,AfterViewInit {
+
   CategoryItem:ICategory[];
   CategorId:number=0;
   selectedCatID:number=0;
@@ -22,7 +23,7 @@ export class OrderMasterComponent implements OnInit,AfterViewInit {
   }
   ngAfterViewInit(): void {
  
-    console.log(this.prdComp.ProductList)
+    //console.log(this.prdComp.ProductList)
   }
 
   ngOnInit() {
@@ -60,7 +61,8 @@ displayCart(data:any):void
   console.log(this.cartProductList)
 
 }
-calcTotalPrice(prod: IShoppingCartItems, newQnt: number): void {
+calcTotalPrice(prod: IShoppingCartItems, newQnt: number): void 
+{
   this.cartProductList.map(prd => {
     if(prd.ProductName == prod.ProductName) {
       prd.SelectedQuantity = newQnt;
@@ -74,21 +76,23 @@ finalTotalPrice()
   {
     this.TotalPrice+=this.cartProductList[i].Unitprice*this.cartProductList[i].SelectedQuantity
     
-    this.prdComp.changeQuantity(this.cartProductList[i].ProductName, this.cartProductList[i].SelectedQuantity);
+    this.prdComp.changeQuantity(this.cartProductList[i].ProductName,this.cartProductList[i].SelectedQuantity)
+    // this.prdComp.changeQuantity(this.cartProductList[i].ProductName, this.cartProductList[i].SelectedQuantity);
 
   }
   console.log(this.TotalPrice)
+  //this.cartProductList=[]
+
+}
+
+
+delete(id:number)
+{
+  this.cartProductList=this.cartProductList.filter(prd =>  prd.ProductID!=id )
+  console.log(this.cartProductList)
+
 }
 
 }
-// delete(id:number)
-// {
-//   let all=this.cartProductList.filter((item) => {
-   
-//   return item.ProductID==id
-//   })
-
-// }
-
 
 
