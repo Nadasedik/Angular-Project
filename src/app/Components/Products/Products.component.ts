@@ -1,19 +1,21 @@
+import { ADsService } from './../../Services/ADs.service';
 import { IShoppingCartItems } from './../../ViewModels/IShoppingCartItems';
 import { DiscountOffers } from './../../ViewModels/DiscountOffers.enum';
 
 import { IProduct } from './../../ViewModels/IProduct';
 import { StoreData } from './../../ViewModels/StoreData';
-import { Component, OnInit ,Inject,Input,OnChanges,EventEmitter, Output} from '@angular/core';
+import { Component, OnInit ,Inject,Input,OnChanges,EventEmitter, Output, OnDestroy} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { StaticProductService } from 'src/app/Services/static-product.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-Products',
   templateUrl: './Products.component.html',
   styleUrls: ['./Products.component.scss']
 })
-export class ProductsComponent implements OnInit,OnChanges {
+export class ProductsComponent implements OnInit,OnChanges,OnDestroy {
   // storeInfo:StoreData;
    PrductList:IProduct[]=[];
  // filterProductList:IProduct[]=[];
@@ -28,9 +30,12 @@ export class ProductsComponent implements OnInit,OnChanges {
   @Input() SCatgID:number=0
   @Output() AddToCart:EventEmitter<IShoppingCartItems[]>;
   // @Output() AddToCart:EventEmitter<IShoppingCartItems>;
-
+   private subscription:Subscription[]=[]
+   nextAd:string=""
+   show:boolean=false;
   constructor( private staticPrd:StaticProductService
-              , private router:Router) {
+              , private router:Router
+              ,private ads:ADsService) {
 
     this.AddToCart= new EventEmitter<IShoppingCartItems[]>();
     //this.AddToCart= new EventEmitter<IShoppingCartItems>();
@@ -53,6 +58,7 @@ export class ProductsComponent implements OnInit,OnChanges {
     this.ClientName="nada"
    this.date=new Date()
   }
+ 
 ngOnChanges():void{
   //this.filterByCategory()
   this.PrductList=this.staticPrd.getProductBtCatID(this.SCatgID)
@@ -60,6 +66,25 @@ ngOnChanges():void{
   ngOnInit() {
     this.PrductList=this.staticPrd.getAllProduct();
     //this.filterProductList=this.staticPrd.getAllProduct()
+
+    let observer={
+
+     next:(ad:string)=>
+     {this.show=true
+      this.nextAd=ad
+      console.log(ad)
+     },
+     error(err:string)
+     {
+       console.log(err)
+     },
+     complete:()=>
+     {this.show=false
+       console.log("finish")
+     }
+    }
+    let ads=this.ads.DisplayAds(4).subscribe(observer)
+    this.subscription.push(ads)
   }
 toggle()
 {
@@ -148,6 +173,13 @@ changeQuantity(PrdName: string, qnt: number): void
 getDetails(prdID:number)
 {
 this.router.navigate(['/Products',prdID])
+}
+
+ngOnDestroy(): void {
+  for (let ad of this.subscription) {
+    ad.unsubscribe();
+  }
+  
 }
 
 }

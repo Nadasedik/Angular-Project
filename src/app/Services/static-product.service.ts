@@ -74,19 +74,39 @@ private   ProductList:IProduct[];
             p.Name=prd.Name
             p.Quantity=prd.Quantity;
             p.Price=prd.Price;
-            p.Name=prd.Name;
             p.Image=prd.Image;
             p.CateogryID=prd.CateogryID
           }
         })
     }
-    // for(let i in this.ProductList)
-    // {
-    //   if(this.ProductList[i].ID==prd.ID)
-    //   this.ProductList[i]=prd
-    //   console.log(this.ProductList[i])
-    // }
-    // console.log(this.ProductList)
+    else{
+      alert("Product Not Found !")
+    }
+    for(let i in this.ProductList)
+    {
+      if(this.ProductList[i].ID==prd.ID)
+      this.ProductList[i]=prd
+     // console.log(this.ProductList[i])
+    }
+    //console.log(this.ProductList)
     
   }
+  // EditProduct(prodID: number, newData: IProduct): void {
+  //   //if product exist
+  //   let productIsExist = this.ProductList.find(prod => prod.ID == prodID);
+  //   if(productIsExist != undefined) {
+  //     this.ProductList.map(p => {
+  //       if(p.ID == prodID) {
+  //         //override values
+  //         p.Name = newData.Name;
+  //         p.Price = newData.Price;
+  //         p.Quantity = newData.Quantity;
+  //         p.CateogryID = newData.CateogryID;
+  //         p.Image = newData.Image;
+  //       }
+  //     })
+  //   } else {
+  //     alert('product not exist');
+  //   }
+  // }
 }

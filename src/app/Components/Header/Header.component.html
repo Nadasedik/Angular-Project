@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light    rounded">
+<nav class="navbar navbar-expand-md navbar-light bg-light rounded border-bottom " >
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,12 +19,42 @@
           <a class="nav-link" routerLink="/AddProduct" routerLinkActive="active">Add Product</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/Login" routerLinkActive="active">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+          <a class="nav-link" routerLink="/Login" [hidden]="IsLogged" outerLinkActive="active">Login</a>
+          <a class="nav-link" routerLink="/Home" [hidden]="!IsLogged" outerLinkActive="active"
+          (click)="logout()">Logout</a>
+        </li>  
+        
       </ul>
+      
     </div>
+    <div class="navbar-text d-flex justify-content-end me-3 fs-5 text-dark " *ngIf="IsLogged">
+      Hello  {{userName}}
+    </div>
+    <!-- Button trigger modal -->
+<button mat-raised-button color="warn" data-bs-toggle="modal" [hidden]="!IsLogged" data-bs-target="#staticBackdrop">
+  Logout
+</button>
   </div>
 </nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title text-danger" id="staticBackdropLabel">Logout</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are You Sure To Logout?!
+      </div>
+      <div class="modal-footer">
+        <button mat-raised-button data-bs-dismiss="modal"class="me-3">No</button>
+        <button mat-raised-button color="warn" data-bs-dismiss="modal" (click)="logout()" >Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

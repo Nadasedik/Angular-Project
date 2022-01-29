@@ -85,12 +85,16 @@
       </tbody>
     </table> -->
 
+    <div class="alert alert-danger text-center w-75 py-4 fs-3 mx-auto mt-3" role="alert" *ngIf="show">
+      {{nextAd}}
+    </div>
+
 <div class="row row-cols-1 row-cols-md-3 g-4  justify-content-center mb-5 g-0 m-0">
   <div class="col" *ngFor="let item of PrductList">
   <div class="card h-100 text-center m-2" style="width: 15rem;" shadow [ngClass]="{'bg-warning':item.Quantity==1,'bg-danger':item.Quantity==0}" >
     <img [src]="item.Image" class="card-img-top " alt="..." >
     <div class="card-body">
-      <h2 class="card-title" appProductCard="blue">{{item.Name}}</h2>
+      <h2 class="card-title" appProductCard="blue">{{item.Name}} <i class="fas fa-edit text-primary ms-3 fs-3" [routerLink]="['/UpdateProduct',item.ID]"></i></h2>
       <p class="card-text" >Price : {{item.Price | currency:'EGP': 'code'}}</p>
       <ng-container [ngSwitch]="item.Quantity">
         <div *ngSwitchCase="0">Out of stock</div>
@@ -101,7 +105,7 @@
       <button mat-raised-button color="accent" class="m-3" (click)="Add(item.ID,item.Name,item.Price,item.Quantity, +itemsCount.value)">Add</button>
       <!-- <button mat-raised-button color="primary" (click)="getDetails(item.ID)">Details</button> -->
       <a mat-raised-button color="primary" [routerLink]="['/Products',item.ID]" target="_self">Details</a>
-      <a mat-raised-button color="warm" [routerLink]="['/UpdateProduct',item.ID]" target="_self">update</a>
+      <!-- <a mat-raised-button color="warm" [routerLink]="['/UpdateProduct',item.ID]" target="_self">update</a> -->
 
       <!-- <button type="button" class="btn btn-secondary" (click)="Add(item, +itemsCount.value)">Add</button> -->
 

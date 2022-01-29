@@ -20,33 +20,35 @@
                       <h1 class="fw-bold mb-4 fs-2" style="color: #8aa6d3;">Update Product Info</h1>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product ID</label>
-                        <input type="text" id="form2Example1" class="form-control" #pId/> 
+                        <input type="text" id="form2Example1" class="form-control" #pId [value]="Product?.ID" /> 
                       </div>
 
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product Name</label>
-                        <input type="text" id="form2Example1" class="form-control" #pname/> 
+                        <input type="text" id="form2Example1" class="form-control" #pname [value]="Product?.Name"/> 
                       </div>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product Quantity</label>
-                        <input type="text" id="form2Example1" class="form-control" #pqnt/> 
+                        <input type="text" id="form2Example1" class="form-control" #pqnt [value]="Product?.Quantity"/> 
                       </div>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product Price</label>
-                        <input type="text" id="form2Example1" class="form-control" #pPrice/> 
+                        <input type="text" id="form2Example1" class="form-control" #pPrice [value]="Product?.Price" /> 
                       </div>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product Image</label>
-                        <input type="text" id="form2Example1" class="form-control" #pImg/> 
+                        <input type="text" id="form2Example1" class="form-control" #pImg [value]="Product?.Image"/> 
                       </div>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Category ID</label>
-                        <input type="text" id="form2Example1" class="form-control" #cID/> 
+                        <input type="text" id="form2Example1" class="form-control" #cID [value]="Product?.CateogryID" /> 
                       </div>
 
                       <div class="d-flex justify-content-end pt-1 mb-4">
                         <button class="btn btn-primary btn-rounded" type="button" style="background-color: #2d6acc;"
-                        (click)="UpadateProduct([pId.value,pname.value,pqnt.value,pPrice.value,pImg.value,cID.value])">Update Product</button>
+                        (click)="UpadateProduct(+pId.value,pname.value,+pqnt.value,+pPrice.value,pImg.value,+cID.value)">Update Product</button>
+                        <!-- <button type="submit" class="btn btn-primary w-50"
+                        (click)="EditProd([pname.value, pqnt.value, pPrice.value, pImg.value, cID.value])">Edit</button> -->
                       </div>
                       <hr>
                       

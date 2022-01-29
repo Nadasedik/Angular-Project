@@ -1,3 +1,4 @@
+import { UserGuardGuard } from './Guards/user-guard.guard';
 import { ProductDetailsComponent } from './Components/ProductDetails/ProductDetails.component';
 import { LayoutComponent } from './Components/Layout/Layout.component';
 import { LoginFormComponent } from './Components/LoginForm/LoginForm.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
     {path:'Home',component:MainPageComponent},
     {path:'Products',component:ProductsComponent},
     {path:'Products/:pid',component:ProductDetailsComponent},
-    {path:'Order',component:OrderMasterComponent},
+    {path:'Order',component:OrderMasterComponent,canActivate:[UserGuardGuard]},
     {path:'AddProduct',component:AddProductComponent},
     {path:'UpdateProduct/:pid',component:UpdateProductComponent}
   ]},
