@@ -1,3 +1,5 @@
+import { ProductDetailsComponent } from './Components/ProductDetails/ProductDetails.component';
+import { UpdateProductComponent } from './Components/UpdateProduct/UpdateProduct.component';
 import { AddProductComponent } from './Components/AddProduct/AddProduct.component';
 import { LayoutComponent } from './Components/Layout/Layout.component';
 import { LoginFormComponent } from './Components/LoginForm/LoginForm.component';
@@ -38,6 +40,8 @@ import { CommonModule } from '@angular/common'
     LoginFormComponent,
     LayoutComponent,
     AddProductComponent,
+    UpdateProductComponent,
+    ProductDetailsComponent
 
   ],
   imports: [
