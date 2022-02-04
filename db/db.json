@@ -1,0 +1,82 @@
+{
+  "Products": [
+    {
+      "id": 5,
+      "Name": "T-shirt",
+      "Quantity": 10,
+      "Price": 200,
+      "Image": "https://picsum.photos/id/1059/300/250",
+      "CateogryID": 1
+    },
+    {
+      "id": 6,
+      "Name": "Lenovo",
+      "Quantity": 15,
+      "Price": 50000,
+      "Image": "https://picsum.photos/id/445/300/250",
+      "CateogryID": 3
+    },
+    {
+      "id": 7,
+      "Name": "skirt",
+      "Quantity": 1,
+      "Price": 100,
+      "Image": "https://picsum.photos/id/535/300/250",
+      "CateogryID": 1
+    },
+    {
+      "id": 8,
+      "Name": "Dell",
+      "Quantity": 20,
+      "Price": 20000,
+      "Image": "https://picsum.photos/id/0/300/250",
+      "CateogryID": 3
+    },
+    {
+      "id": "50",
+      "Name": "lool",
+      "Quantity": "134",
+      "Price": "4500",
+      "Image": "https://picsum.photos/id/13/300/250",
+      "CateogryID": "3"
+    },
+    {
+      "id": "56",
+      "Name": "vooo",
+      "Quantity": "1234",
+      "Price": "21000",
+      "Image": "https://picsum.photos/id/24/300/250",
+      "CateogryID": "1"
+    },
+    {
+      "id": "90",
+      "Name": "test56",
+      "Quantity": "1900",
+      "Price": "4500",
+      "Image": "https://picsum.photos/id/9/300/250",
+      "CateogryID": "2"
+    },
+    {
+      "id": "509",
+      "Name": "sample",
+      "Quantity": "60",
+      "Price": "21000",
+      "Image": "https://picsum.photos/id/34/300/250",
+      "CateogryID": "2"
+    }
+  ],
+  "categories": [
+    {
+      "ID": 1,
+      "Name": "clothes"
+    },
+    {
+      "ID": 2,
+      "Name": "furniture"
+    },
+    {
+      "ID": 3,
+      "Name": "Laptop"
+    }
+  ]
+}
