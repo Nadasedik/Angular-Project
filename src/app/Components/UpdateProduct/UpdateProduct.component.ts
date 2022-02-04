@@ -1,7 +1,10 @@
 import { IProduct } from './../../ViewModels/IProduct';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { StaticProductService } from 'src/app/Services/static-product.service';
+import { ProductsAPIService } from 'src/app/Services/ProductsAPI.service';
+import { ICategory } from 'src/app/ViewModels/ICategory';
+import { CategoryAPIService } from 'src/app/Services/CategoryAPI.service';
 
 
 @Component({
@@ -10,68 +13,93 @@ import { StaticProductService } from 'src/app/Services/static-product.service';
   styleUrls: ['./UpdateProduct.component.scss']
 })
 export class UpdateProductComponent implements OnInit {
- UpdatedProduct!:IProduct|null 
- //UpdatedProduct={}as IProduct
- Product!: IProduct | null ;
+ //UpdatedProduct!:IProduct|null 
+ UpdatedProduct:IProduct={}as IProduct
+ //Product!: IProduct | null ;
+ CategoryItem:ICategory[] | undefined;
+ add!:boolean;
+ 
 
-  constructor(private staticPrd:StaticProductService
+  constructor(//private staticPrd:StaticProductService
+               private APIPrd:ProductsAPIService
               ,private activatedRoute: ActivatedRoute
-              , private router: Router) { }
+              , private router: Router
+              ,private APICat:CategoryAPIService)
+
+               {
+                console.log(router.url);
+               }
 
   ngOnInit() {
+    // this.activatedRoute.paramMap.subscribe((paramMap)=>
+    // {
+    //   let idd=Number(paramMap.get('pid'))
+    //   let prodt=this.staticPrd.gitProductByID(idd)
+    //   this.UpdatedProduct=prodt
+    // })
+    this.activatedRoute.paramMap.subscribe(param => {
+
+      let id = Number(param.get('id'));
+    if(this.router.url=='/AddProduct')
+    {
+      this.add=true
+    }
+    if(this.router.url==`/UpdateProduct${id}`)
+    {
+      this.add=false
+          this.APIPrd.getProductByID(id).subscribe(prd=>{
+            this.UpdatedProduct=prd
+            console.log(prd)
+            console.log(this.add)
+    })
+  }
+  })
+
+    this.APICat.getAllCategories().subscribe(cat=>{
+      this.CategoryItem=cat
+    })
+  }
+  
+  //  UpadateProduct(ids:number,name:string,Qnt:number,price:number,Img:string,cID:number):void
+  // {
+
+  //   this.UpdatedProduct={
+  //     id:ids,
+  //     Name:name,
+  //     Quantity:Qnt,
+  //     Price:price,
+  //     Image:Img,
+  //     CateogryID:cID
+  //   }
+
+  //   this.staticPrd.UpdateProducts(ids,this.UpdatedProduct)
+  //    console.log(this.UpdatedProduct)
+  //   this.router.navigate(['/Products']);
+  // }
+  UpadateProduct()
+  {
     this.activatedRoute.paramMap.subscribe((paramMap)=>
     {
       let idd=Number(paramMap.get('pid'))
-      let prodt=this.staticPrd.gitProductByID(idd)
-      this.UpdatedProduct=prodt
+      this.APIPrd.updateProduct(idd,this.UpdatedProduct) .subscribe(() =>
+      this.router.navigate(['/Products']));
+      alert('Updated Successfully');
+       console.log(this.UpdatedProduct)
     })
-    // this.activatedRoute.paramMap.subscribe(param => {
-    //   let id = Number(param.get('id'));
-    //   let specificProd = this.staticPrd.gitProductByID(id);
-    //   this.Product = specificProd;
-    // })
-  }
-   UpadateProduct(id:number,name:string,Qnt:number,price:number,Img:string,cID:number):void
 
-  //UpadateProduct(data:any):void
+  }
+
+  AddProducts()
   {
-    //let [name, qnt, price, imgUrl, catID] = data;
-    // this.activatedRoute.paramMap.subscribe(param => {
-    //   let id2 = Number(param.get('id'));
-    //   this.staticPrd.UpdateProducts
-    //   ( id2, {ID: id2,Name:name, Quantity: qnt, Price:price, Image: imgUrl, CateogryID:catID})
-    // })
-    this.UpdatedProduct={
-      ID:id,
-      Name:name,
-      Quantity:Qnt,
-      Price:price,
-      Image:Img,
-      CateogryID:cID
-    }
-    // this.activatedRoute.paramMap.subscribe(param => {
-    //   let id2 = Number(param.get('id'));
-    //   this.staticPrd.UpdateProducts( id2, this.UpdatedProduct)
-    // })
-    // this.activatedRoute.paramMap.subscribe(param => {
-    //   let id2 = Number(param.get('id'));
-    //   this.staticPrd.UpdateProducts( id2,this.UpdatedProduct)
-    // })
-    //this.UpdatedProduct=this.staticPrd.UpdateProducts(this.UpdatedProduct)
-    this.staticPrd.UpdateProducts(id,this.UpdatedProduct)
-     console.log(this.UpdatedProduct)
-    this.router.navigate(['/Products']);
+    this.APIPrd.AddProduct(this.UpdatedProduct)
+    .subscribe(prods => {
+      alert('added Successfully');
+      this.router.navigate(['/Products']);
+    })
+    console.log(this.UpdatedProduct)
+
   }
 
-  // EditProd(data :any[]): void {
-  //   let [name, qnt, price, imgUrl, catID] = data;
-  //   this.activatedRoute.paramMap.subscribe(param => {
-  //     let id2 = Number(param.get('id'));
-  //     this.staticPrd.EditProduct
-  //     ( id2, {ID: id2, Name:name, Quantity: qnt, Price:price, Image: imgUrl,CateogryID: catID})
-  //   })
-  //   //redirect
-  //   this.router.navigate(['/Products']);
-  // }
+ 
 
 }

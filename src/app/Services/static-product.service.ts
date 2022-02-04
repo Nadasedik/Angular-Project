@@ -7,14 +7,14 @@ import { Injectable } from '@angular/core';
 export class StaticProductService {
 private   ProductList:IProduct[];
   constructor() { 
-    this.ProductList=[{ID:1,Name:"dress",Quantity:30,Price:150,Image:'https://picsum.photos/id/1014/300/250',CateogryID:1},
-    {ID:2,Name:"Apple",Quantity:10,Price:40000,Image:'https://picsum.photos/id/48/300/250',CateogryID:3}
-   ,{ID:3,Name:"table",Quantity:9,Price:4000,Image:'https://picsum.photos/id/1068/300/250',CateogryID:2}
-   ,{ID:4,Name:"LG",Quantity:13,Price:30000,Image:'https://picsum.photos/id/20/300/250',CateogryID:3}
-   ,{ID:5,Name:"T-shirt",Quantity:1,Price:100,Image:'https://picsum.photos/id/1059/300/250',CateogryID:1}
-   ,{ID:6,Name:"Lenovo",Quantity:20,Price:25000,Image:'https://picsum.photos/id/445/300/250',CateogryID:3}
-    ,{ID:7,Name:"skirt",Quantity:0,Price:100,Image:'https://picsum.photos/id/535/300/250',CateogryID:1}
-    ,{ID:8,Name:"Dell",Quantity:16,Price:20000,Image:'https://picsum.photos/id/0/300/250',CateogryID:3}
+    this.ProductList=[{id:1,Name:"dress",Quantity:30,Price:150,Image:'https://picsum.photos/id/1014/300/250',CateogryID:1},
+    {id:2,Name:"Apple",Quantity:10,Price:40000,Image:'https://picsum.photos/id/48/300/250',CateogryID:3}
+   ,{id:3,Name:"table",Quantity:9,Price:4000,Image:'https://picsum.photos/id/1068/300/250',CateogryID:2}
+   ,{id:4,Name:"LG",Quantity:13,Price:30000,Image:'https://picsum.photos/id/20/300/250',CateogryID:3}
+   ,{id:5,Name:"T-shirt",Quantity:1,Price:100,Image:'https://picsum.photos/id/1059/300/250',CateogryID:1}
+   ,{id:6,Name:"Lenovo",Quantity:20,Price:25000,Image:'https://picsum.photos/id/445/300/250',CateogryID:3}
+    ,{id:7,Name:"skirt",Quantity:0,Price:100,Image:'https://picsum.photos/id/535/300/250',CateogryID:1}
+    ,{id:8,Name:"Dell",Quantity:16,Price:20000,Image:'https://picsum.photos/id/0/300/250',CateogryID:3}
     ]
   }
 
@@ -40,7 +40,7 @@ private   ProductList:IProduct[];
   
   gitProductByID(prdID:number): IProduct | null
   {
-    let exist=this.ProductList.find(prd=>prd.ID==prdID)
+    let exist=this.ProductList.find(prd=>prd.id==prdID)
     if(exist)
     {
       return exist
@@ -53,7 +53,7 @@ private   ProductList:IProduct[];
 
   getAllProdductIDS():number[]
   {
-    let prdid:number[]=this.ProductList.map(prd=>prd.ID)
+    let prdid:number[]=this.ProductList.map(prd=>prd.id)
     return prdid
   }
 
@@ -62,14 +62,14 @@ private   ProductList:IProduct[];
     this.ProductList.push(prd);
   }
 
-  UpdateProducts(id:number,prd:IProduct)
+  UpdateProducts(ids:number,prd:IProduct)
   {
-    let pID=this.ProductList.find(prod=>prod.ID==id)
+    let pID=this.ProductList.find(prod=>prod.id==ids)
     if(pID)
     {
       this.ProductList.map(p=>
         {
-          if(p.ID==id)
+          if(p.id==ids)
           {
             p.Name=prd.Name
             p.Quantity=prd.Quantity;
@@ -84,29 +84,12 @@ private   ProductList:IProduct[];
     }
     for(let i in this.ProductList)
     {
-      if(this.ProductList[i].ID==prd.ID)
+      if(this.ProductList[i].id==prd.id)
       this.ProductList[i]=prd
      // console.log(this.ProductList[i])
     }
     //console.log(this.ProductList)
     
   }
-  // EditProduct(prodID: number, newData: IProduct): void {
-  //   //if product exist
-  //   let productIsExist = this.ProductList.find(prod => prod.ID == prodID);
-  //   if(productIsExist != undefined) {
-  //     this.ProductList.map(p => {
-  //       if(p.ID == prodID) {
-  //         //override values
-  //         p.Name = newData.Name;
-  //         p.Price = newData.Price;
-  //         p.Quantity = newData.Quantity;
-  //         p.CateogryID = newData.CateogryID;
-  //         p.Image = newData.Image;
-  //       }
-  //     })
-  //   } else {
-  //     alert('product not exist');
-  //   }
-  // }
+ 
 }

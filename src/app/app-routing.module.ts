@@ -17,7 +17,9 @@ const routes: Routes = [
     {path:'Products',component:ProductsComponent},
     {path:'Products/:pid',component:ProductDetailsComponent},
     {path:'Order',component:OrderMasterComponent,canActivate:[UserGuardGuard]},
-    {path:'AddProduct',component:AddProductComponent},
+    // {path:'AddProduct',component:AddProductComponent},
+     {path:'AddProduct',component:UpdateProductComponent},
+    {path:'UpdateProduct',component:UpdateProductComponent },
     {path:'UpdateProduct/:pid',component:UpdateProductComponent}
   ]},
   {path:'Login', component:LoginFormComponent},

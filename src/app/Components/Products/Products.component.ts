@@ -9,6 +9,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { StaticProductService } from 'src/app/Services/static-product.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ProductsAPIService } from 'src/app/Services/ProductsAPI.service';
+import { CategoryAPIService } from 'src/app/Services/CategoryAPI.service';
+// import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-Products',
@@ -33,9 +36,14 @@ export class ProductsComponent implements OnInit,OnChanges,OnDestroy {
    private subscription:Subscription[]=[]
    nextAd:string=""
    show:boolean=false;
-  constructor( private staticPrd:StaticProductService
+
+  constructor( //private staticPrd:StaticProductService
+              private ApiPrd:ProductsAPIService
               , private router:Router
-              ,private ads:ADsService) {
+              ,private ads:ADsService
+              ,private APICat:CategoryAPIService
+              //,public dialog: MatDialog
+              ) {
 
     this.AddToCart= new EventEmitter<IShoppingCartItems[]>();
     //this.AddToCart= new EventEmitter<IShoppingCartItems>();
@@ -61,11 +69,17 @@ export class ProductsComponent implements OnInit,OnChanges,OnDestroy {
  
 ngOnChanges():void{
   //this.filterByCategory()
-  this.PrductList=this.staticPrd.getProductBtCatID(this.SCatgID)
+  //this.PrductList=this.staticPrd.getProductBtCatID(this.SCatgID)
+  this.ApiPrd.getProductByCatID(this.SCatgID).subscribe(prd=>{
+    this.PrductList=prd
+  })
 }
   ngOnInit() {
-    this.PrductList=this.staticPrd.getAllProduct();
+    //this.PrductList=this.staticPrd.getAllProduct();
     //this.filterProductList=this.staticPrd.getAllProduct()
+    this.ApiPrd.getAllProducts().subscribe(prd=>{
+      this.PrductList=prd
+    })
 
     let observer={
 
@@ -93,40 +107,16 @@ toggle()
  console.log(this.IsPurshased )
 }
 
-//second trial
-// Add(product:IProduct,count:number)
-// {
-//   this.cart={
-//    ProductID:product.ID,
-//   ProductName:product.Name,
-//   Unitprice:product.Price,
-//   SelectedQuantity:count,
-//   }
-  
-  
-  
-//   this.AddToCart.emit(this.cart)
-  
-// }
-
-
 
 //first trial
-Add(id:number,name:string,price:number,quantity:number,count:number)
+Add(ids:number,name:string,price:number,quantity:number,count:number)
 {
-  // this.totalPrice+= +count*price;
-  // if(this.ProductList[id].Quantity>=count&&this.ProductList[id].Quantity>0)
-  // this.ProductList[id-1].Quantity-=count
-  // console.log(this.ProductList[id-1].Quantity)
-  //id.Quantity--
-  //this.Quantity=this.Quantity-1
-  //console.log(Quantity)
     if(quantity>0&&quantity>=count&&count>0){
-      let exist=this.cart.find(prd=>prd.ProductID==id)
+      let exist=this.cart.find(prd=>prd.ProductID==ids)
       if(exist)
       {
         this.cart.map(prod=>{
-          if(prod.ProductID==id)
+          if(prod.ProductID==ids)
           {
             prod.SelectedQuantity+=count
           }
@@ -134,7 +124,7 @@ Add(id:number,name:string,price:number,quantity:number,count:number)
       }
       else{
       this.cart.push({
-        ProductID:id,
+        ProductID:ids,
         ProductName:name,
         Unitprice:price,
         SelectedQuantity:count,
@@ -175,6 +165,13 @@ getDetails(prdID:number)
 this.router.navigate(['/Products',prdID])
 }
 
+delete(ids:number)
+{
+  this.PrductList=this.PrductList.filter(prd =>  prd.id!=ids )
+  this.ApiPrd.deleteProduct(ids).subscribe();
+  alert("Product Removed Successfully ")
+
+}
 ngOnDestroy(): void {
   for (let ad of this.subscription) {
     ad.unsubscribe();

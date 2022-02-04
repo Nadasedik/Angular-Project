@@ -16,37 +16,44 @@
                 <div class="col-md-8 d-flex align-items-center">
                   <div class="card-body py-5 px-4 p-md-5">
 
-                    <form action="">
-                      <h1 class="fw-bold mb-4 fs-2" style="color: #8aa6d3;">Update Product Info</h1>
+                    <form (ngSubmit)="add?AddProducts():UpadateProduct()">
+                      <h1 class="fw-bold mb-4 fs-2" style="color: #8aa6d3;">{{add?'AddProduct':'Update Product Info'}}</h1>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product ID</label>
-                        <input type="text" id="form2Example1" class="form-control" #pId [value]="Product?.ID" /> 
+                        <input type="text" id="form2Example1" class="form-control"name="pid" #pId [(ngModel)]="UpdatedProduct.id" [value]="UpdatedProduct?.id"/> 
                       </div>
 
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product Name</label>
-                        <input type="text" id="form2Example1" class="form-control" #pname [value]="Product?.Name"/> 
+                        <input type="text" id="form2Example1" class="form-control" name="name" #pname [(ngModel)]="UpdatedProduct.Name" [value]="UpdatedProduct.Name"/> 
                       </div>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product Quantity</label>
-                        <input type="text" id="form2Example1" class="form-control" #pqnt [value]="Product?.Quantity"/> 
+                        <input type="text" id="form2Example1" class="form-control" #pqnt name="Quantity" [(ngModel)]="UpdatedProduct.Quantity" [value]="UpdatedProduct.Quantity" /> 
                       </div>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product Price</label>
-                        <input type="text" id="form2Example1" class="form-control" #pPrice [value]="Product?.Price" /> 
+                        <input type="text" id="form2Example1" class="form-control" #pPrice name="price" [(ngModel)]="UpdatedProduct.Price" [value]="UpdatedProduct.Price"/> 
                       </div>
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example1">Product Image</label>
-                        <input type="text" id="form2Example1" class="form-control" #pImg [value]="Product?.Image"/> 
+                        <input type="text" id="form2Example1" class="form-control" #pImg name="img" [(ngModel)]="UpdatedProduct.Image" [value]="UpdatedProduct.Image"/> 
                       </div>
-                      <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example1">Category ID</label>
-                        <input type="text" id="form2Example1" class="form-control" #cID [value]="Product?.CateogryID" /> 
+                      <div class="mb-3 ">
+                        <label for="catID" class="form-label"></label>
+                        <select class="form-control  mx-auto" name="category"   id="catID" [(ngModel)]="UpdatedProduct.CateogryID" [value]="UpdatedProduct.CateogryID" >
+                          
+                          <option *ngFor=" let item of CategoryItem" #pCatID [value]='item.ID'>{{item.Name}}</option>
+                          
+                    
+                        </select>
                       </div>
 
                       <div class="d-flex justify-content-end pt-1 mb-4">
-                        <button class="btn btn-primary btn-rounded" type="button" style="background-color: #2d6acc;"
-                        (click)="UpadateProduct(+pId.value,pname.value,+pqnt.value,+pPrice.value,pImg.value,+cID.value)">Update Product</button>
+                        <button class="btn btn-primary btn-rounded" type="submit" style="background-color: #2d6acc;" *ngIf="!add">Update Product</button>
+                        <button class="btn btn-primary btn-rounded" type="submit" style="background-color: #2d6acc;" *ngIf="add">Add Product</button>
+                        <!-- <button class="btn btn-primary btn-rounded" type="button" style="background-color: #2d6acc;"
+                        (click)="UpadateProduct(+pId.value,pname.value,+pqnt.value,+pPrice.value,pImg.value,+cID.value)">Update Product</button> -->
                         <!-- <button type="submit" class="btn btn-primary w-50"
                         (click)="EditProd([pname.value, pqnt.value, pPrice.value, pImg.value, cID.value])">Edit</button> -->
                       </div>

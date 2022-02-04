@@ -2,6 +2,8 @@ import { ProductsComponent } from './../../Products/Products.component';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { IShoppingCartItems } from 'src/app/ViewModels/IShoppingCartItems';
 import { ICategory } from './../../../ViewModels/ICategory';
+import { ProductsAPIService } from 'src/app/Services/ProductsAPI.service';
+import { CategoryAPIService } from 'src/app/Services/CategoryAPI.service';
 @Component({
   selector: 'app-OrderMaster',
   templateUrl: './OrderMaster.component.html',
@@ -9,7 +11,7 @@ import { ICategory } from './../../../ViewModels/ICategory';
 })
 export class OrderMasterComponent implements OnInit,AfterViewInit {
 
-  CategoryItem:ICategory[];
+  CategoryItem:ICategory[] | undefined;
   CategorId:number=0;
   selectedCatID:number=0;
   TotalPrice:number=0;
@@ -17,8 +19,9 @@ export class OrderMasterComponent implements OnInit,AfterViewInit {
   pQun:number=0;
   cartProductList:IShoppingCartItems[]=[];
   @ViewChild(ProductsComponent) prdComp!:ProductsComponent
-  constructor() { 
-    this.CategoryItem=[{ID:1,Name:"clothes"},{ID:2,Name:"furniture"},{ID:3,Name:"Laptop"}]
+  constructor( private ApiPrd:ProductsAPIService
+              ,private APICat:CategoryAPIService) { 
+    // this.CategoryItem=[{ID:1,Name:"clothes"},{ID:2,Name:"furniture"},{ID:3,Name:"Laptop"}]
   
   }
   ngAfterViewInit(): void {
@@ -27,6 +30,9 @@ export class OrderMasterComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit() {
+    this.APICat.getAllCategories().subscribe(cat=>{
+      this.CategoryItem=cat
+    })
   }
   chooseCategory(id:number)
 {
@@ -34,25 +40,7 @@ export class OrderMasterComponent implements OnInit,AfterViewInit {
   console.log(id)
 }
 
-//second trial
-// displayCart(data:IShoppingCartItems):void
-// {
-//   let exist=this.cartProductList.find(prd=>prd.ProductName==data.ProductName)
-//   if(exist)
-//   {
-//    this.cartProductList.map(p=>{
-//     if(p.ProductName == exist?.ProductName) {
-//       p.SelectedQuantity +=data.SelectedQuantity;
-//       console.log(this.cartProductList)
-//    }})
-//    console.log(this.cartProductList)
-//   }
-//   else{
-//   this.cartProductList.push(data)
-// }
-//   console.log(this.cartProductList)
 
-// }
 
 //first trial
 displayCart(data:any):void
@@ -88,9 +76,9 @@ finalTotalPrice()
 
 delete(id:number)
 {
+
   this.cartProductList=this.cartProductList.filter(prd =>  prd.ProductID!=id )
   console.log(this.cartProductList)
-
 }
 
 }

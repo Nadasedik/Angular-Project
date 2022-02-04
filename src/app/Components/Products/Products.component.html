@@ -94,7 +94,9 @@
   <div class="card h-100 text-center m-2" style="width: 15rem;" shadow [ngClass]="{'bg-warning':item.Quantity==1,'bg-danger':item.Quantity==0}" >
     <img [src]="item.Image" class="card-img-top " alt="..." >
     <div class="card-body">
-      <h2 class="card-title" appProductCard="blue">{{item.Name}} <i class="fas fa-edit text-primary ms-3 fs-3" [routerLink]="['/UpdateProduct',item.ID]"></i></h2>
+      <h2 class="card-title" appProductCard="blue">{{item.Name}} </h2>
+      <i class="far fa-trash-alt text-danger fs-3"data-bs-toggle="modal" data-bs-target="#staticBackdrop2" ></i>
+      <i class="fas fa-edit text-primary ms-3 fs-3" [routerLink]="['/UpdateProduct',item.id]"></i>
       <p class="card-text" >Price : {{item.Price | currency:'EGP': 'code'}}</p>
       <ng-container [ngSwitch]="item.Quantity">
         <div *ngSwitchCase="0">Out of stock</div>
@@ -102,17 +104,37 @@
         <div *ngSwitchDefault>{{item.Quantity}}</div>
       </ng-container>
       <input #itemsCount type="number" class="form-control" min="1" [max]="item.Quantity">
-      <button mat-raised-button color="accent" class="m-3" (click)="Add(item.ID,item.Name,item.Price,item.Quantity, +itemsCount.value)">Add</button>
+      <button mat-raised-button color="accent" class="m-3" (click)="Add(item.id,item.Name,item.Price,item.Quantity, +itemsCount.value)">Add</button>
       <!-- <button mat-raised-button color="primary" (click)="getDetails(item.ID)">Details</button> -->
-      <a mat-raised-button color="primary" [routerLink]="['/Products',item.ID]" target="_self">Details</a>
+      <a mat-raised-button color="primary" [routerLink]="['/Products',item.id]" target="_self">Details</a>
       <!-- <a mat-raised-button color="warm" [routerLink]="['/UpdateProduct',item.ID]" target="_self">update</a> -->
 
       <!-- <button type="button" class="btn btn-secondary" (click)="Add(item, +itemsCount.value)">Add</button> -->
 
     </div></div>
+    <!-- Modal -->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title text-danger" id="staticBackdropLabel2">Delete</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are You Sure You Want To Delete?!
+      </div>
+      <div class="modal-footer">
+        <button mat-raised-button data-bs-dismiss="modal"class="me-3">No</button>
+        <button mat-raised-button color="warn" data-bs-dismiss="modal" (click)="delete(item.id)" >delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   </div>
 
 </div>
+
 <!-- <div>{{NID |egyptianNationalID:''}}</div>
 <div>{{card|creditcard}}</div> -->
     <!-- <div>Total Price:  {{totalPrice | currency :' EGP'}}</div> -->

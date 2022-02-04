@@ -23,6 +23,8 @@ import { EgyptianNationalIDPipe } from './Pipes/egyptian-national-id.pipe';
 import { CreditcardPipe } from './Pipes/creditcard.pipe';
 import {OrderMasterComponent} from './Components/Order/OrderMaster/OrderMaster.component';
 import { CommonModule } from '@angular/common'
+import {HttpClientModule} from '@angular/common/http'
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { CommonModule } from '@angular/common'
     LayoutComponent,
     AddProductComponent,
     UpdateProductComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    
 
   ],
   imports: [
@@ -51,7 +54,9 @@ import { CommonModule } from '@angular/common'
     MatSliderModule,
     MatButtonModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule
+
     
   ],
   providers: [],
